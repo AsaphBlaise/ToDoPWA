@@ -2,24 +2,21 @@
 # Secretos necesarios (Settings → Secrets and variables → Actions):
 #   API_URL      = https://tu-api.vercel.app   (sin "/" al final)
 #   CRON_SECRET  = el mismo valor que en las variables de entorno de Vercel
-
 name: Recordatorios push
+
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
-  workflow_dispatch:
+    - cron: "*/15 * * * *"   # GitHub puede retrasarlo unos minutos en horas pico
+  workflow_dispatch:          # botón "Run workflow" para probarlo a mano
+
 
 jobs:
   recordatorios:
     runs-on: ubuntu-latest
-
     steps:
       - name: Llamar al endpoint del cron
-        env:
-          API_URL: ${{ secrets.API_URL }}
-          CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
-          curl -L --fail-with-body -sS \
-            -H "Authorization: Bearer $CRON_SECRET" \
-            "$API_URL/api/cron/reminders"
+          curl --fail-with-body -sS \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "${{ secrets.API_URL }}/api/cron/reminders"
