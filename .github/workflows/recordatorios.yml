@@ -17,6 +17,6 @@ jobs:
     steps:
       - name: Llamar al endpoint del cron
         run: |
-          curl --fail-with-body -sS \
+          curl -L --fail-with-body -sS \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             "${{ secrets.API_URL }}/api/cron/reminders"
