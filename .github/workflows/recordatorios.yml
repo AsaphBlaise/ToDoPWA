@@ -7,7 +7,7 @@ name: Recordatorios push
 
 on:
   schedule:
-    - cron: "*/1 * * * *"   # GitHub puede retrasarlo unos minutos en horas pico
+    - cron: "*/5 * * * *"   # GitHub puede retrasarlo unos minutos en horas pico
   workflow_dispatch:          # botón "Run workflow" para probarlo a mano
 
 
